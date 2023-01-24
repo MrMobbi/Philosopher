@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:35:13 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 16:44:06 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:05:44 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-
 # define MAX_INT "2147483647"
 
 typedef struct s_list {
 	int				name;
+	int				alive;
+	long			start;
+	long			curent;
 	struct s_list	*next;
 	struct s_list	*previous;
-	struct s_list	*right;
 	struct s_list	*left;
 	pthread_t		thread_id;
+	pthread_mutex_t	fork_id;
 	struct s_rules	*rules;
 }					t_list;
 
 typedef struct s_rules {
-
 	int		nbr_philo;
 	int		t_die;
 	int		t_eat;
@@ -60,11 +61,17 @@ int		ft_launcher(t_rules *rules);
 int		ft_exit(t_rules *rules);
 void	*routine(void *arg);
 
+//		##### Ft_Philo_Status.c #####
+void	ft_think(t_list *philo);
+void	ft_eat(t_list *philo);
+void	ft_sleep(t_list *philo);
+
 //		##### Utils.c #####
 int		ft_atoi(char *str);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_putstr(char *str);
+long	ft_get_timestamp(void);
 
 //		##### Utils_List.c #####
 t_list	*ft_lstnew(t_rules *rules, int name);

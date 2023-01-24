@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:10:04 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 10:32:48 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/24 10:47:45 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,15 @@ void	ft_putstr(char *str)
 		write(1, &str[i], 1);
 		i++;
 	}
+}
+
+long	ft_get_timestamp(void)
+{
+	struct timeval	now;
+	static long		start;
+
+	gettimeofday(&now, 0);
+	if (start == 0)
+		start = now.tv_sec * 1000 + now.tv_usec / 1000;
+	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - start);
 }

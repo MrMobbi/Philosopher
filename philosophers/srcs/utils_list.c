@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:28:26 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 16:52:10 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/24 14:48:29 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ t_list	*ft_lstnew(t_rules *rules, int name)
 	new->next = NULL;
 	new->previous = NULL;
 	new->name = name;
+	new->alive = 0;
 	new->rules = rules;
+	pthread_mutex_init(&new->fork_id, NULL);
 	return (new);
 }
 
@@ -51,10 +53,6 @@ void	ft_add_left_and_right(t_rules *rules)
 	tmp2 = rules->start;
 	while (tmp != NULL)
 	{
-		if (tmp->next == NULL)
-			tmp->right = rules->start;
-		else
-			tmp->right = tmp->next;
 		if (tmp->previous == NULL)
 		{
 			while (tmp2 != NULL)
@@ -71,7 +69,7 @@ void	ft_add_left_and_right(t_rules *rules)
 
 void	ft_free_lst(t_list *list)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	while (list != NULL)
 	{

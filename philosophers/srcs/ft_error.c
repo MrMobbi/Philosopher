@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:07:07 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 16:06:11 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:18:56 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ void	ft_display_error(int code_error, int arg)
 void	ft_display_error_launch(int code_error)
 {
 	if (code_error == 1)
-		printf("Erreur lors de la creation des threads\n");
+		printf("Erreur lors de la creation des mutexs\n");
 	else if (code_error == 2)
+		printf("Erreur lors de la creation des threads\n");
+	else if (code_error == 3)
 		printf("Erreur lors du join des threads\n");
+	else if (code_error == 4)
+		printf("Erreur lors de la destruction des mutexs\n");
 }

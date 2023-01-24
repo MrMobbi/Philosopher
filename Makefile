@@ -6,7 +6,7 @@
 #    By: mjulliat <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 12:18:20 by mjulliat          #+#    #+#              #
-#    Updated: 2023/01/23 15:48:46 by mjulliat         ###   ########.fr        #
+#    Updated: 2023/01/24 15:55:16 by mjulliat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SOURCES		= main.c\
 			  ft_error.c\
 			  ft_check_error.c\
 			  ft_init_data.c\
-			  ft_launcher.c
+			  ft_launcher.c\
+			  ft_philo_status.c
 
 	### OBJETCTS ###
 
