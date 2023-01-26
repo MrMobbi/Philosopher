@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:28:26 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/25 17:10:41 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:08:08 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ t_list	*ft_lstnew(t_rules *rules, int name)
 	new->rules = rules;
 	new->last_meal = 0;
 	new->finish = 0;
-	pthread_mutex_init(&new->fork_id, NULL);
+	new->rules_t_die = rules->t_die;
+	new->rules_t_eat = rules->t_eat;
+	new->rules_t_sleep = rules->t_sleep;
+	new->rules_n_meal = rules->n_meal;
 	return (new);
 }
 

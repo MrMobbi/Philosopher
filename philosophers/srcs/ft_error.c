@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:07:07 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/25 18:24:30 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:35:01 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,17 @@ void	ft_display_error_launch(int code_error)
 	if (code_error == 1)
 		printf("Erreur lors de la creation des mutexs_fork\n");
 	else if (code_error == 2)
-		printf("Erreur lors de la creation des mutexs_timestamp\n");
+		printf("Erreur lors de la creation du mutexs_timestamp\n");
 	else if (code_error == 3)
-		printf("Erreur lors de la creation des threads\n");
+		printf("Erreur lors de la creation du mutex_read_meal\n");
 	else if (code_error == 4)
-		printf("Erreur lors du join des threads\n");
+		printf("Erreur lors de la creation des threads\n");
 	else if (code_error == 5)
-		printf("Erreur lors de la destruction des mutexs\n");
+		printf("Erreur lors du join des threads\n");
+	else if (code_error == 6)
+		printf("Erreur lors de la destruction des mutexs_fork\n");
+	else if (code_error == 7)
+		printf("Erreur lors de la destruction du mutex_timestamp\n");
+	else if (code_error == 8)
+		printf("Erreur lors de la destruction du mutex_read_meal\n");
 }

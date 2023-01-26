@@ -6,7 +6,7 @@
 #    By: mjulliat <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 12:18:20 by mjulliat          #+#    #+#              #
-#    Updated: 2023/01/25 17:59:36 by mjulliat         ###   ########.fr        #
+#    Updated: 2023/01/26 15:26:01 by mjulliat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ SOURCES		= main.c\
 			  ft_init_data.c\
 			  ft_launcher.c\
 			  ft_philo_status.c\
-			  ft_time.c
+			  ft_time.c\
+			  ft_mutex_and_exit.c\
+			  ft_philo_watcher.c
 
 	### OBJETCTS ###
 
