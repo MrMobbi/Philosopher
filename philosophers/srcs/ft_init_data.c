@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:00:12 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 16:44:42 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:58:19 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ void	ft_init_data(char **av, t_rules *rules)
 	rules->t_sleep = ft_atoi(av[4]);
 	rules->n_meal = ft_atoi(av[5]);
 	rules->start = ft_lstnew(rules, i);
+	rules->checker = 1;
+	rules->check_dead = 0;
+	rules->check_finish = 0;
 	i++;
 	while (i <= rules->nbr_philo)
 	{
 		ft_lstadd_back(&rules->start, ft_lstnew(rules, i));
 		i++;
 	}
-	ft_add_left_and_right(rules);
+	ft_add_left(rules);
 }

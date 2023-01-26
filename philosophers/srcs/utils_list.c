@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 11:28:26 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/24 14:48:29 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:10:41 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ t_list	*ft_lstnew(t_rules *rules, int name)
 	if (new == NULL)
 		return (0);
 	new->next = NULL;
-	new->previous = NULL;
 	new->name = name;
 	new->alive = 0;
 	new->rules = rules;
+	new->last_meal = 0;
+	new->finish = 0;
 	pthread_mutex_init(&new->fork_id, NULL);
 	return (new);
 }
@@ -39,30 +40,21 @@ void	ft_lstadd_back(t_list **lst, t_list *nw)
 	{
 		while (node->next != NULL)
 			node = node->next;
-		nw->previous = node;
 		node->next = nw;
 	}
 }
 
-void	ft_add_left_and_right(t_rules *rules)
+void	ft_add_left(t_rules *rules)
 {
 	t_list	*tmp;
-	t_list	*tmp2;
 
 	tmp = rules->start;
-	tmp2 = rules->start;
 	while (tmp != NULL)
 	{
-		if (tmp->previous == NULL)
-		{
-			while (tmp2 != NULL)
-			{
-				tmp->left = tmp2;
-				tmp2 = tmp2->next;
-			}
-		}
+		if (tmp->next == NULL)
+			tmp->left = rules->start;
 		else
-			tmp->left = tmp->previous;
+			tmp->left = tmp->next;
 		tmp = tmp->next;
 	}
 }
@@ -75,7 +67,6 @@ void	ft_free_lst(t_list *list)
 	{
 		tmp = list;
 		list = list->next;
-		printf("List free Nbr [%d]\n", tmp->name);
 		free(tmp);
 	}
 }

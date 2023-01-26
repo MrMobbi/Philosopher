@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:34:29 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/23 15:57:07 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:10:34 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,5 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	ft_free_lst(rules.start);
-	printf("Nbr of philo : %d\n", rules.nbr_philo);
-	printf("Time before dying : %d\n", rules.t_die);
-	printf("Time to eat : %d\n", rules.t_eat);
-	printf("Time to sleep : %d\n", rules.t_sleep);
-	printf("Number of meals : %d\n", rules.n_meal);
 	return (0);
 }
