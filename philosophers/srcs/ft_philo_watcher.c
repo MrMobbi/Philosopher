@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:26:35 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 16:52:00 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:58:13 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ void	ft_looking_for_death(t_rules *rules)
 		lfd = rules->start;
 		while (lfd != NULL)
 		{
-			pthread_mutex_lock(&rules->mutex_timestamp);
-			rules->check_timer = ft_get_timestamp();
-			pthread_mutex_unlock(&rules->mutex_timestamp);
 			pthread_mutex_lock(&rules->mutex_read_meal);
-			tmp_last_meal = lfd->last_meal;
-			pthread_mutex_unlock(&rules->mutex_read_meal);
+			ft_hugo(rules, lfd->last_meal, &tmp_last_meal);
 			if ((rules->check_timer - tmp_last_meal) >= rules->t_die)
 			{
 				ft_philo_died(rules, lfd->name);
@@ -43,6 +39,15 @@ void	ft_looking_for_death(t_rules *rules)
 		if (rules->check_finish == 1)
 			break ;
 	}
+}
+
+void	ft_hugo(t_rules *rules, long last_meal, long *tmp_last_meal)
+{
+	pthread_mutex_lock(&rules->mutex_timestamp);
+	rules->check_timer = ft_get_timestamp();
+	pthread_mutex_unlock(&rules->mutex_timestamp);
+	tmp_last_meal = &last_meal;
+	pthread_mutex_unlock(&rules->mutex_read_meal);
 }
 
 void	ft_philo_died(t_rules *rules, int name)
