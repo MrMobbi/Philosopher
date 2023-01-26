@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:36:29 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 15:40:01 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:50:59 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_launcher(t_rules *rules)
 	while (i < rules->nbr_philo)
 	{
 		if (pthread_create(&tmp->thread_id, NULL, &routine, tmp) != 0)
-			return (4);
+			return (6);
 		tmp = tmp->next;
 		i++;
 	}
@@ -51,12 +51,14 @@ void	*routine(void *void_list)
 	while (i < philo->rules_n_meal)
 	{
 		if (philo->name % 2 == 0 && i == 0)
-			usleep(1000);
+			usleep(10000);
 		if (philo->alive == 1)
 			break ;
 		ft_think(philo);
 		i++;
 	}
+	pthread_mutex_lock(&philo->rules->mutex_finish);
 	philo->finish = 1;
+	pthread_mutex_unlock(&philo->rules->mutex_finish);
 	return (NULL);
 }

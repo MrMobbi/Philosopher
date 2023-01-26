@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:35:13 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 15:31:25 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:47:01 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_rules {
 	long			check_timer;
 	pthread_mutex_t	mutex_timestamp;
 	pthread_mutex_t	mutex_read_meal;
+	pthread_mutex_t	mutex_alive;
+	pthread_mutex_t	mutex_finish;
 	t_list			*start;
 }			t_rules;
 

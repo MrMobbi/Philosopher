@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:26:35 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 15:40:44 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:52:00 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	ft_philo_died(t_rules *rules, int name)
 	printf("[%ld] | [%d] died\n", rules->check_timer, name);
 	while (tmp != NULL)
 	{
+		pthread_mutex_lock(&rules->mutex_alive);
 		tmp->alive = 1;
+		pthread_mutex_unlock(&rules->mutex_alive);
 		tmp = tmp->next;
 	}
 	rules->check_dead = 1;
@@ -66,11 +68,16 @@ int	ft_check_if_finish(t_rules *rules)
 	tmp = rules->start;
 	while (tmp != NULL)
 	{
+		pthread_mutex_lock(&rules->mutex_finish);
 		if (tmp->finish == 1)
+		{
 			rules->check_finish = 1;
+			pthread_mutex_unlock(&rules->mutex_finish);
+		}
 		else
 		{
 			rules->check_finish = 0;
+			pthread_mutex_unlock(&rules->mutex_finish);
 			return (1);
 		}
 		tmp = tmp->next;
