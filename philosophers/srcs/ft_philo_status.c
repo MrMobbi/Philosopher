@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:55:21 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:38 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/31 10:26:03 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void	ft_think(t_list *philo)
 	philo->now = philo->curent - philo->start;
 	pthread_mutex_lock(&philo->rules->mutex_alive);
 	if (philo->alive == 0)
+	{
 		printf("[%ld] | [%d] is thinking\n", philo->now, philo->name);
-	pthread_mutex_unlock(&philo->rules->mutex_alive);
+		pthread_mutex_unlock(&philo->rules->mutex_alive);
+	}
+	else
+		pthread_mutex_unlock(&philo->rules->mutex_alive);
 	pthread_mutex_lock(&philo->left->mutex_fork);
 	ft_take_fork(philo);
 	pthread_mutex_lock(&philo->mutex_fork);
@@ -46,12 +50,12 @@ void	ft_eat(t_list *philo)
 	}
 	else
 		pthread_mutex_unlock(&philo->rules->mutex_alive);
-	ft_usleep(philo->rules_t_eat, philo);
 	pthread_mutex_lock(&philo->rules->mutex_timestamp);
 	pthread_mutex_lock(&philo->rules->mutex_read_meal);
 	philo->last_meal = ft_get_timestamp();
 	pthread_mutex_unlock(&philo->rules->mutex_timestamp);
 	pthread_mutex_unlock(&philo->rules->mutex_read_meal);
+	ft_usleep(philo->rules_t_eat, philo);
 }
 
 void	ft_sleep(t_list *philo)

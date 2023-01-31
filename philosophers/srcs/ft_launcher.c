@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:36:29 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:23 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/01/31 10:25:52 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*routine(void *void_list)
 	while (i < philo->rules_n_meal)
 	{
 		if (philo->name % 2 == 0 && i == 0)
-			usleep(10000);
+			usleep(1000);
 		if (philo->alive == 1)
 			break ;
 		ft_think(philo);
