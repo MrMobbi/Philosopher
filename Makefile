@@ -6,19 +6,19 @@
 #    By: mjulliat <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/01 12:18:20 by mjulliat          #+#    #+#              #
-#    Updated: 2023/01/31 11:40:57 by mjulliat         ###   ########.fr        #
+#    Updated: 2023/02/03 11:55:44 by mjulliat         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 	### COMPILATION ###
 
-CC			= gcc -g -pthread -fsanitize=address
+CC			= gcc -pthread -fsanitize=address
 FLAGS		= -Wall -Werror -Wextra
 
 	### EXECUTABLE ###
 
 NAME		= philo
-BONUS		= philo_bonus
+N_BONUS		= philo_bonus
 
 	### INCLUDES ###
 
@@ -50,17 +50,14 @@ SOURCES		= main.c\
 
 	### SOURCES BONNUS ###
 
-SOURCES_B	= main.c\
-			  utils.c\
-			  utils_list.c\
-			  ft_error.c\
-			  ft_check_error.c\
-			  ft_init_data.c\
-			  ft_launcher.c\
-			  ft_philo_status.c\
-			  ft_time.c\
-			  ft_mutex_and_exit.c\
-			  ft_philo_watcher.c
+SOURCES_B	= main_bonus.c\
+			  utils_bonus.c\
+			  ft_error_bonus.c\
+			  ft_check_error_bonus.c\
+			  ft_init_data_bonus.c\
+			  ft_time_bonus.c\
+			  ft_launcher_bonus.c\
+			  ft_philo_status_bonus.c
 
 	### OBJECTS ###
 
@@ -88,12 +85,13 @@ WHITE		= \033[1;37m
 all:		tmp $(NAME)
 
 $(NAME):	$(OBJS)
-			@echo "$(BLUE)######## Obect file Created ######### $(WHITE)"
+			@echo "$(BLUE)######## Compiling Project ######### $(WHITE)"
 			$(CC) $(FLAGS) -o $@ $^ 
 			@echo "$(GREEN)######## Project Compilated ######## $(WHITE)"
 
 tmp:		
-			mkdir -p philosophers/objs
+			@echo "$(BLUE)######## Compiling SRCS in OBJS ######## $(WHITE)"
+			@mkdir -p philosophers/objs
 
 $(OBJS_PATH)/%.o:	$(SRCS_PATH)/%.c
 					$(CC) $(FLAGS) -I$(HEADERS) -c $< -o $@
@@ -105,25 +103,24 @@ clean:
 
 fclean:		clean
 			rm -rf $(NAME)
-			rm -rf $(BONUS)
+			rm -rf $(N_BONUS)
 
 re:			fclean all
 
-bonus:		tmp_b $(BONUS)
+bonus:		tmp_b $(N_BONUS)
 
-$(BONUS):	$(OBJS_B)
-			@echo "$(BLUE)######## Obect file Created ######### $(WHITE)"
+$(N_BONUS):		$(OBJS_B)
+			@echo "$(BLUE)######## Compiling Project ######### $(WHITE)"
 			$(CC) $(FLAGS) -o $@ $^ 
 			@echo "$(GREEN)######## Project Compilated ######## $(WHITE)"
 
 tmp_b:		
-			mkdir -p philosophers_bonus/objs
+			@echo "$(BLUE)######## Compiling SRCS in OBJS ######## $(WHITE)"
+			@mkdir -p philosophers_bonus/objs
+
+reb:		fclean bonus
 
 $(OBJB_PATH)/%.o:	$(SRCB_PATH)/%.c
 					$(CC) $(FLAGS) -I$(HEADERS_B) -c $< -o $@
-
-
-
-	### PHONY ###
 
 .PHONY:		clean, fclean, re, printf, tmp, all, philo

@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:24:28 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:30 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:33:31 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,31 @@ int	ft_mutex(t_rules *rules)
 int	ft_exit(t_rules *rules)
 {
 	int		i;
+	int		code_error;
 	t_list	*tmp;
 
 	i = 0;
 	tmp = rules->start;
 	while (i < rules->nbr_philo)
 	{
-		if (pthread_detach(tmp->thread_id) != 0)
+		if (rules->nbr_philo == 1)
+		{
+			pthread_detach(tmp->thread_id);
+			break ;
+		}
+		if (pthread_join(tmp->thread_id, NULL) != 0)
 			return (7);
 		tmp = tmp->next;
 		i++;
 	}
+	code_error = ft_destroy_mutex(rules);
+	if (code_error != 0)
+		return (code_error);
+	return (0);
+}
+
+int	ft_destroy_mutex(t_rules *rules)
+{
 	if (pthread_mutex_destroy(&rules->mutex_timestamp))
 		return (8);
 	if (pthread_mutex_destroy(&rules->mutex_read_meal))

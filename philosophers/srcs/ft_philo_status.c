@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:55:21 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/31 10:26:03 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:29:05 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	ft_eat(t_list *philo)
 	}
 	else
 		pthread_mutex_unlock(&philo->rules->mutex_alive);
+	ft_usleep(philo->rules_t_eat);
 	pthread_mutex_lock(&philo->rules->mutex_timestamp);
 	pthread_mutex_lock(&philo->rules->mutex_read_meal);
 	philo->last_meal = ft_get_timestamp();
 	pthread_mutex_unlock(&philo->rules->mutex_timestamp);
 	pthread_mutex_unlock(&philo->rules->mutex_read_meal);
-	ft_usleep(philo->rules_t_eat, philo);
 }
 
 void	ft_sleep(t_list *philo)
@@ -72,7 +72,7 @@ void	ft_sleep(t_list *philo)
 	}
 	else
 		pthread_mutex_unlock(&philo->rules->mutex_alive);
-	ft_usleep(philo->rules_t_sleep, philo);
+	ft_usleep(philo->rules_t_sleep);
 }
 
 void	ft_take_fork(t_list *philo)

@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:40 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:45 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/02 17:28:19 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ long	ft_get_timestamp(void)
 	return ((now.tv_sec * 1000 + now.tv_usec / 1000) - start);
 }
 
-void	ft_usleep(long time, t_list *philo)
+void	ft_usleep(long time)
 {
 	long	start;
 	long	curent;
 	long	res;
 
-	(void) philo;
 	start = ft_get_timestamp();
 	res = 0;
 	while (res < time)

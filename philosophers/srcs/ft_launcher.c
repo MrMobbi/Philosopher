@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:36:29 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/31 10:25:52 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:29:58 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,24 @@ void	*routine(void *void_list)
 	{
 		if (philo->name % 2 == 0 && i == 0)
 			usleep(1000);
+		pthread_mutex_lock(&philo->rules->mutex_alive);
 		if (philo->alive == 1)
+		{
+			pthread_mutex_unlock(&philo->rules->mutex_alive);
 			break ;
+		}
+		else
+			pthread_mutex_unlock(&philo->rules->mutex_alive);
 		ft_think(philo);
 		i++;
 	}
+	ft_exit_routine(philo);
+	return (NULL);
+}
+
+void	ft_exit_routine(t_list *philo)
+{
 	pthread_mutex_lock(&philo->rules->mutex_finish);
 	philo->finish = 1;
 	pthread_mutex_unlock(&philo->rules->mutex_finish);
-	return (NULL);
 }

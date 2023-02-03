@@ -6,7 +6,7 @@
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:35:13 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/31 10:24:14 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/03 11:53:18 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_init_data(char **av, t_rules *rules);
 //		##### Ft_Launcher.c #####
 int		ft_launcher(t_rules *rules);
 void	*routine(void *arg);
+void	ft_exit_routine(t_list *philo);
 
 //		##### Ft_Philo_Status.c #####
 void	ft_think(t_list *philo);
@@ -82,17 +83,19 @@ void	ft_take_fork(t_list *philo);
 
 //		##### Ft_Time.c #####
 long	ft_get_timestamp(void);
-void	ft_usleep(long time, t_list *philo);
+void	ft_usleep(long time);
 
 //		##### Ft_Philo_Watcher.c #####
 void	ft_looking_for_death(t_rules *rules);
-void	ft_hugo(t_rules *rules, long last_meal, long *tmp_last_meal);
+int		ft_dead_or_no(t_rules *rules, t_list *lfd);
+void	ft_get_last_meal(t_rules *rules, long *tmp_last_meal, t_list *lfd);
 void	ft_philo_died(t_rules *rules, int name);
 int		ft_check_all_finish(t_rules *rules);
 
-//		##### Ft_Mutex.c #####
+//		##### Ft_Mutex_And_Exit.c #####
 int		ft_mutex(t_rules *rules);
 int		ft_exit(t_rules *rules);
+int		ft_destroy_mutex(t_rules *rules);
 
 //		##### Utils.c #####
 int		ft_atoi(char *str);

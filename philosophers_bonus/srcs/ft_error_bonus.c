@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_error_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjulliat <mjulliat@student.42.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:07:07 by mjulliat          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:13 by mjulliat         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:02:06 by mjulliat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	ft_error(int ac, char **av)
 {
@@ -59,28 +59,5 @@ void	ft_display_error(int code_error, int arg)
 
 void	ft_display_error_launch(int code_error)
 {
-	if (code_error == 1)
-		printf("Erreur lors de la creation des mutexs_fork\n");
-	else if (code_error == 2)
-		printf("Erreur lors de la creation du mutexs_timestamp\n");
-	else if (code_error == 3)
-		printf("Erreur lors de la creation du mutex_read_meal\n");
-	else if (code_error == 4)
-		printf("Erreur lors de la creation du mutex_alive\n");
-	else if (code_error == 5)
-		printf("Erreur lors de la creation du mutex_finish\n");
-	else if (code_error == 6)
-		printf("Erreur lors de la creation des threads\n");
-	else if (code_error == 7)
-		printf("Erreur lors du join des threads\n");
-	else if (code_error == 8)
-		printf("Erreur lors de la destruction des mutexs_fork\n");
-	else if (code_error == 9)
-		printf("Erreur lors de la destruction du mutex_timestamp\n");
-	else if (code_error == 10)
-		printf("Erreur lors de la destruction du mutex_read_meal\n");
-	else if (code_error == 11)
-		printf("Erreur lors de la destruction du mutex_alive\n");
-	else if (code_error == 12)
-		printf("Erreur lors de la destruction du mutex_finish\n");
+	(void) code_error;
 }
